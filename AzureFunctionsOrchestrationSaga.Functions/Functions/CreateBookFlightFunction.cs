@@ -18,7 +18,5 @@ public class CreateBookFlightFunction(
         var message = System.Text.Json.JsonSerializer.Deserialize<BookFlightMessage>(item);
 
         await action.ExecuteAsync(message);
-        
-        _logger.LogInformation("Car booked!");
     }
 }

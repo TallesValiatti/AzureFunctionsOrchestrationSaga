@@ -18,7 +18,5 @@ public class CreateBookCarFunction(
         var message = System.Text.Json.JsonSerializer.Deserialize<BookCarMessage>(item);
 
         await action.ExecuteAsync(message);
-        
-        _logger.LogInformation("Car booked!");
     }
 }

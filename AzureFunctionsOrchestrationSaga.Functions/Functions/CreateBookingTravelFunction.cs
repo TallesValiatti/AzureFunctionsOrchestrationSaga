@@ -32,7 +32,7 @@ public class CreateBookingTravelFunction(
 
         await repository.AddAsync(bookingTravel);
         
-        _logger.LogInformation("Entity Id {id} - booking travel created", bookingTravel.Id);
+        _logger.LogWarning("Entity Id {id} - booking travel created", bookingTravel.Id);
 
         await messageService.PublishAsync(
             nameof(BookCarMessage),

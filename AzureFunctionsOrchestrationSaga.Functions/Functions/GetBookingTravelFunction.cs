@@ -15,8 +15,7 @@ namespace AzureFunctionsOrchestrationSaga.Functions.Functions;
 
 public class GetBookingTravelFunction(
     ILoggerFactory loggerFactory, 
-    IBookingTravelRepository repository,
-    IMessageService messageService)
+    IBookingTravelRepository repository)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<GetBookingTravelFunction>();
 

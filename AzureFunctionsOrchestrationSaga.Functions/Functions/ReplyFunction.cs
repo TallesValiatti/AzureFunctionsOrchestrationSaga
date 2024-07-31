@@ -38,12 +38,24 @@ public class ReplyFunction(
             case EventType.BookFlightCompleted:
                 await HandleBookFlightCompletedAsync(bookingTravel);
                 break;
+            
+            case EventType.BookCarCompensated:
+                await HandleBookCarCompensatedAsync(bookingTravel);
+                break;
+            
+            case EventType.BookHotelCompensated:
+                await HandleBookHotelCompensatedAsync(bookingTravel);
+                break;
+            
+            case EventType.BookFlightCompensated:
+                await HandleBookFlightCompensatedAsync(bookingTravel);
+                break;
         }
     }
-
+    
     private async Task HandleBookCarCompletedAsync(BookingTravel bookingTravel)
     {
-        _logger.LogInformation("Entity Id {id} - book car completed", bookingTravel.Id);
+        _logger.LogWarning("Entity Id {id} - book car completed", bookingTravel.Id);
         
         bookingTravel.AddEvent(EventType.BookCarCompleted);
         
@@ -54,7 +66,7 @@ public class ReplyFunction(
     
     private async Task HandleBookHotelCompletedAsync(BookingTravel bookingTravel)
     {
-        _logger.LogInformation("Entity Id {id} - book hotel completed", bookingTravel.Id);
+        _logger.LogWarning("Entity Id {id} - book hotel completed", bookingTravel.Id);
         
         bookingTravel.AddEvent(EventType.BookHotelCompleted);
         
@@ -65,8 +77,38 @@ public class ReplyFunction(
     
     private async Task HandleBookFlightCompletedAsync(BookingTravel bookingTravel)
     {
-        _logger.LogInformation("Entity Id {id} - book flight completed", bookingTravel.Id);
+        _logger.LogWarning("Entity Id {id} - book flight completed", bookingTravel.Id);
         
         bookingTravel.AddEvent(EventType.BookFlightCompleted);
     }
+    
+    private async Task HandleBookCarCompensatedAsync(BookingTravel bookingTravel)
+    {
+        _logger.LogWarning("Entity Id {id} - book car compensated", bookingTravel.Id);
+        
+        bookingTravel.AddEvent(EventType.BookCarCompensated);
+    }
+    
+    private async Task HandleBookHotelCompensatedAsync(BookingTravel bookingTravel)
+    {
+        _logger.LogWarning("Entity Id {id} - book hotel compensated", bookingTravel.Id);
+        
+        bookingTravel.AddEvent(EventType.BookHotelCompensated);
+        
+        await messageService.PublishAsync(
+            nameof(CancelBookCarMessage),
+            JsonSerializer.Serialize(new CancelBookCarMessage(bookingTravel.Id)));
+    }
+    
+    private async Task HandleBookFlightCompensatedAsync(BookingTravel bookingTravel)
+    {
+        _logger.LogWarning("Entity Id {id} - book flight compensated", bookingTravel.Id);
+        
+        bookingTravel.AddEvent(EventType.BookFlightCompensated);
+        
+        await messageService.PublishAsync(
+            nameof(CancelBookHotelMessage),
+            JsonSerializer.Serialize(new CancelBookHotelMessage(bookingTravel.Id)));
+    }
+
 }
