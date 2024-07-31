@@ -1,0 +1,12 @@
+GET http://localhost:7071/api/booking-travel/6b6eda27-e132-4fd7-a2e1-446641a2b055
+
+###
+
+POST http://localhost:7071/api/booking-travel
+
+
+
+
+
+
+

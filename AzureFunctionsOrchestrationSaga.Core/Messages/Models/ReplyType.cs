@@ -1,6 +1,8 @@
 namespace AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 
-public enum ReplyType 
+public enum EventType 
 {
-    
+    BookCarCompleted = 1,
+    BookHotelCompleted,
+    BookFlightCompleted
 }

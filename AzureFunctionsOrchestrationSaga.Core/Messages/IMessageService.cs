@@ -4,5 +4,5 @@ namespace AzureFunctionsOrchestrationSaga.Core.Messages;
 
 public interface IMessageService
 {
-    Task PublishAsync(IMessage message);
+    Task PublishAsync(string queueName, string message);
 }

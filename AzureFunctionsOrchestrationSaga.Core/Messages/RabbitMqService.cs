@@ -19,17 +19,15 @@ public class RabbitMqService(string connectionSting) : IMessageService
         return channel;
     }
     
-    public async Task PublishAsync(IMessage message)
+    public async Task PublishAsync(string queueName, string message)
     {
         await Task.Yield();
         
         using var connection = CreateConnection();
         using var chanel = connection.CreateModel();
 
-        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
-
-        var queueName = message.GetType().Name;
-        
+        var body = Encoding.UTF8.GetBytes(message);
+  
         chanel.QueueDeclare(
             queue: queueName,
             durable: false,

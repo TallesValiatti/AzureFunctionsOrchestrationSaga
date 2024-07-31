@@ -2,11 +2,21 @@ using AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 
 namespace AzureFunctionsOrchestrationSaga.Core.Actions;
 
-public abstract class ActionBase<T, TW> : IAction 
+public abstract class ActionBase<T, TW> : IAction
     where T : IMessage
     where TW : IMessage
 {
-    public abstract Task ExecuteAsync(T message);
+    protected abstract Task ExecuteAsync(T message);
 
-    public abstract Task CompensateAsync(TW message);
+    protected abstract Task CompensateAsync(TW message);
+
+    Task IAction.ExecuteAsync<T1>(T1 message)
+    {
+        return ExecuteAsync((T)(IMessage)message!);
+    }
+
+    Task IAction.CompensateAsync<T1>(T1 message)
+    {
+        return CompensateAsync((TW)(IMessage)message!);
+    }
 }

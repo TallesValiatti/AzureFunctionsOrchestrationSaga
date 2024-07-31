@@ -1,5 +1,8 @@
-using AzureFunctionsOrchestrationSaga.Core.Messages.Models;
-
 namespace AzureFunctionsOrchestrationSaga.Core.Actions;
 
-public interface IAction;
+public interface IAction
+{
+    public Task ExecuteAsync<T>(T message);
+
+    public Task CompensateAsync<T>(T message);
+}

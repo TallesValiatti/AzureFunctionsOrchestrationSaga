@@ -1,16 +1,24 @@
+using System.Text.Json;
+using AzureFunctionsOrchestrationSaga.Core.Messages;
 using AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 
 namespace AzureFunctionsOrchestrationSaga.Core.Actions;
 
-public class BookCarAction : ActionBase<BookCarMessage, CancelBookCarMessage>
+public class BookCarAction(IMessageService messageService) : ActionBase<BookCarMessage, CancelBookCarMessage>
 {
-    public override Task ExecuteAsync(BookCarMessage message)
+    protected override async Task ExecuteAsync(BookCarMessage message)
     {
-        throw new NotImplementedException();
+        // Perform action
+        
+        await messageService.PublishAsync(
+            nameof(ReplyMessage),
+            JsonSerializer.Serialize(new ReplyMessage(
+                message.BookingTravelId,
+                EventType.BookCarCompleted)));
     }
 
-    public override Task CompensateAsync(CancelBookCarMessage message)
+    protected override Task CompensateAsync(CancelBookCarMessage message)
     {
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 }

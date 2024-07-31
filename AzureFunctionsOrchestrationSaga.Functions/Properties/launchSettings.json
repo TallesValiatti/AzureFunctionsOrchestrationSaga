@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "AzureFunctionsOrchestrationSaga.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7055",
+      "launchBrowser": false
+    }
+  }
+}

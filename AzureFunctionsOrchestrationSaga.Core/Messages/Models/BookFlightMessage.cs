@@ -1,5 +1,3 @@
 namespace AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 
-public record BookFlightMessage : IMessage
-{
-}
+public record BookFlightMessage(Guid BookingTravelId) : IMessage;
