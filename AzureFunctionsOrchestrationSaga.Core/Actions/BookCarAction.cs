@@ -1,4 +1,5 @@
 using System.Text.Json;
+using AzureFunctionsOrchestrationSaga.Core.Entities;
 using AzureFunctionsOrchestrationSaga.Core.Messages;
 using AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 using Microsoft.Extensions.Logging;

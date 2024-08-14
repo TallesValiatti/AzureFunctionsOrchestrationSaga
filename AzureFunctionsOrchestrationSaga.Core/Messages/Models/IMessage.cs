@@ -1,6 +1,3 @@
 namespace AzureFunctionsOrchestrationSaga.Core.Messages.Models;
 
-public interface IMessage
-{
-    
-}
+public interface IMessage;

@@ -16,3 +16,13 @@ public class BookingTravel
     }
 }
 
+public enum EventType 
+{
+    BookCarCompleted = 1,
+    BookHotelCompleted,
+    BookFlightCompleted,
+    BookCarCompensated,
+    BookHotelCompensated,
+    BookFlightCompensated
+}
+
